@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/AFSM/states/state_machine.gd" type="Script" id=1]
+[ext_resource path="res://examples/light_on.gd" type="Script" id=2]
+[ext_resource path="res://examples/light_off.gd" type="Script" id=3]
+[ext_resource path="res://addons/AFSM/assets/Ubuntu/Ubuntu-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://examples/LightController.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="Fsm example" type="Node2D"]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+auto_start = false
+
+[node name="LightOn" type="Node" parent="StateMachine"]
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": "A finite state machine (FSM) node. It is a container for states and transitions. It can be used to create complex AI behavior."
+}
+
+[node name="LightOff" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+theme = SubResource( 2 )
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -80.0
+margin_right = 80.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+text = "Light State"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -20.0
+margin_right = 128.0
+margin_bottom = 20.0
+
+[node name="Turn on Button" type="Button" parent="Control/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 40.0
+text = "Turn on"
+
+[node name="Turn off Button2" type="Button" parent="Control/HBoxContainer"]
+margin_left = 126.0
+margin_right = 256.0
+margin_bottom = 40.0
+text = "Turn off"
+
+[connection signal="pressed" from="Control/HBoxContainer/Turn on Button" to="Control" method="_on_Turn_on_Button_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/Turn off Button2" to="Control" method="_on_Turn_off_Button2_pressed"]
