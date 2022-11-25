@@ -17,7 +17,7 @@ func _exit_tree() -> void:
 	var files_to_remove = []
 	var script_templates_dir = ProjectSettings.get_setting("editor/script_templates_search_path")
 	files_to_remove=list_files(my_script_templates_path)
-	remove_files(files_to_remove, my_script_templates_path)
+	remove_files(files_to_remove, script_templates_dir)
 
 func list_files(path: String) -> Array:
 	var dir = Directory.new()
